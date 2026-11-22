@@ -1,51 +1,51 @@
-# Compilador Pascal-like
+# Pascal-like Compiler
 
-Trabalho desenvolvido para a disciplina de Compiladores, implementando um compilador para uma linguagem semelhante a Pascal. O projeto foi construído em C e cobre as fases de análise léxica, análise sintática e geração de código intermediário em MEPA.
+Project developed for the Compilers course, implementing a compiler for a Pascal-like language. Built in C, it covers lexical analysis, syntactic analysis, and intermediate code generation in MEPA.
 
-## Funcionalidades
+## Features
 
-- Analisador léxico com reconhecimento de identificadores, números (decimal e notação exponencial), comentários e todos os operadores da linguagem
-- Analisador sintático descendente recursivo (ASDR) baseado na gramática da linguagem
-- Tabela de símbolos com hash para gerenciamento de variáveis declaradas
-- Geração de código intermediário em MEPA
-- Detecção de erros léxicos, sintáticos e semânticos com indicação de linha
+- Lexical analyzer supporting identifiers, numbers (decimal and exponential notation), comments, and all language operators
+- Recursive descent parser (RDP) based on the language grammar
+- Hash-based symbol table for managing declared variables
+- Intermediate code generation in MEPA
+- Lexical, syntactic, and semantic error detection with line numbers
 
-## Estrutura do Projeto
+## Project Structure
 
 ```
 .
-├── compilador.c       # Código-fonte principal
-├── codigo.txt         # Arquivo de entrada (código-fonte a compilar)
+├── compilador.c       # Main source code
+├── codigo.txt         # Input file (source code to compile)
 └── README.md
 ```
 
-## Como Compilar
+## How to Compile
 
 ```bash
 gcc -Wall -Wno-unused-result -g -Og compilador.c -o compilador
 ```
 
-## Como Executar
+## How to Run
 
-O compilador lê o arquivo `codigo.txt` por padrão. Coloque o código-fonte Pascal-like nesse arquivo e execute:
+The compiler reads `codigo.txt` by default. Place your Pascal-like source code in that file and run:
 
 ```bash
 ./compilador
 ```
 
-Para alterar o arquivo de entrada, modifique a linha 138 do `compilador.c`:
+To change the input file, edit line 138 of `compilador.c`:
 
 ```c
-FILE *f = fopen("seuarquivo.txt", "r");
+FILE *f = fopen("yourfile.txt", "r");
 ```
 
-A saída é o código MEPA gerado, impresso no terminal, seguido da tabela de símbolos ao final da execução.
+The output is the generated MEPA code printed to the terminal, followed by the symbol table at the end of execution.
 
-## Exemplo de Entrada
+## Example Input
 
 ```pascal
 (*
-programa calcula o fatorial de um numero lido
+program computes the factorial of a read number
 *)
 program fatorial;
 var
@@ -59,11 +59,11 @@ begin
     fat := fat * cont;
     cont := cont + 1
   end;
-  write(fat) (*imprime o fatorial calculado*)
+  write(fat) (*prints the computed factorial*)
 end.
 ```
 
-## Exemplo de Saída (MEPA)
+## Example Output (MEPA)
 
 ```
     INPP
@@ -99,25 +99,25 @@ Entrada Tabela Simbolos: [...] => num | Endereco: 1
 Entrada Tabela Simbolos: [...] => cont | Endereco: 2
 ```
 
-## Linguagem Suportada
+## Supported Language
 
-A gramática da linguagem é semelhante a Pascal, com suporte a:
+The grammar is similar to Pascal, supporting:
 
-- Tipos: `integer`, `boolean`, `char` (char ignorado na geração de código desta versão)
-- Comandos: atribuição, `read`, `write`, `if/then/else`, `while/do`, blocos `begin/end`
-- Operadores relacionais: `<`, `<=`, `>`, `>=`, `=`, `<>`
-- Operadores lógicos: `or`, `and`, `not`
-- Operadores aritméticos: `+`, `-`, `*`, `div`
-- Comentários: `(* ... *)`
+- Types: `integer`, `boolean`, `char` (`char` is ignored during code generation in this version)
+- Statements: assignment, `read`, `write`, `if/then/else`, `while/do`, `begin/end` blocks
+- Relational operators: `<`, `<=`, `>`, `>=`, `=`, `<>`
+- Logical operators: `or`, `and`, `not`
+- Arithmetic operators: `+`, `-`, `*`, `div`
+- Comments: `(* ... *)`
 
-## Limitações Conhecidas
+## Known Limitations
 
-- O tipo `char` é reconhecido pelo léxico mas ignorado na geração de código
-- Expressões mistas entre tipos (ex: `25 + (x > y)`) não geram erro semântico adequado
-- Comentários não fechados retornam erro de `[END]` em vez de indicar o comentário aberto
+- The `char` type is recognized by the lexer but ignored during code generation
+- Mixed-type expressions (e.g., `25 + (x > y)`) do not trigger a proper semantic error
+- Unclosed comments report an `[END]` error instead of pointing to the unclosed comment
 
-## Tecnologias
+## Technologies
 
 - **C**
 - **GCC**
-- **MEPA** (Máquina de Execução Para Algoritmos) — linguagem de código intermediário
+- **MEPA** (*Máquina de Execução Para Algoritmos* — Algorithm Execution Machine) — intermediate code language
